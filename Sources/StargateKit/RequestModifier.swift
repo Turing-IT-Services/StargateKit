@@ -2,11 +2,12 @@
 //  RequestModifier.swift
 //  StargateKit
 //
-//  Created by Murilo Araujo on 22/12/24.
+//  Created by Murilo Araujo on 08/03/25.
 //
 
 import Vapor
 
 public protocol RequestModifier: Sendable {
-    func handle(request: inout ClientRequest)
+    /// Allows in–place modification of a ClientRequest.
+    func handle(request: inout ClientRequest) throws
 }

@@ -7,19 +7,25 @@
 
 import Vapor
 
-extension HTTPMediaType {
+import Vapor
+
+public extension HTTPMediaType {
+    /// Returns the media type string for a given file extension.
+    /// This method first looks into the fixed base mapping and then into the additionalMappings.
     static func fileExtension(_ ext: String) -> String? {
-        switch ext.lowercased() {
-        case "html": return "text/html"
-        case "css": return "text/css"
-        case "js": return "application/javascript"
-        case "json": return "application/json"
-        case "png": return "image/png"
-        case "jpg", "jpeg": return "image/jpeg"
-        case "gif": return "image/gif"
-        case "svg": return "image/svg+xml"
-        case "ico": return "image/x-icon"
-        default: return nil
-        }
+        let baseMapping: [String: String] = [
+            "html": "text/html",
+            "css": "text/css",
+            "js": "application/javascript",
+            "json": "application/json",
+            "png": "image/png",
+            "jpg": "image/jpeg",
+            "jpeg": "image/jpeg",
+            "gif": "image/gif",
+            "svg": "image/svg+xml",
+            "ico": "image/x-icon"
+        ]
+        let key = ext.lowercased()
+        return baseMapping[key]
     }
 }
